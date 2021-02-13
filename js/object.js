@@ -1,6 +1,5 @@
-import {getArbitraryNumber} from './random-number.js';
-import {getInteger} from './integer.js';
-import {getRandomArrayElement} from './random-array-element.js';
+import {getArbitraryNumber} from './random-numbers.js';
+import {getInteger} from './random-numbers.js';
 
 const TYPES_ARRAY = ['palace', 'flat', 'house', 'bungalow'];
 const CHECKIN_ARRAY = ['12:00', '13:00', '14:00'];
@@ -10,8 +9,12 @@ const PHOTOS_ARRAY = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg', 
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+  
+const getRandomArrayElement = (elements) => {
+  return elements[getInteger(0, elements.length -1)]
+};
 
-const getObject = () => {
+const getObjectAd = () => {
   const location = {
     x: getArbitraryNumber(35.65000, 35.70000, 5),
     y: getArbitraryNumber(139.70000, 139.80000, 5),
@@ -39,4 +42,4 @@ const getObject = () => {
 };
 
 
-export {getObject}
+export {getObjectAd}
