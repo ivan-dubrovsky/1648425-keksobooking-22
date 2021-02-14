@@ -1,3 +1,3 @@
-import {getArray} from './total-array.js';
+import {getSimilarAds} from './similar-ads.js';
 
-getArray();
+getSimilarAds();

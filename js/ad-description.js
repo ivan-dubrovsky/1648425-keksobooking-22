@@ -14,7 +14,7 @@ const getRandomArrayElement = (elements) => {
   return elements[getInteger(0, elements.length -1)]
 };
 
-const getObjectAd = () => {
+const getAd = () => {
   const location = {
     x: getArbitraryNumber(35.65000, 35.70000, 5),
     y: getArbitraryNumber(139.70000, 139.80000, 5),
@@ -42,4 +42,4 @@ const getObjectAd = () => {
 };
 
 
-export {getObjectAd}
+export {getAd}
