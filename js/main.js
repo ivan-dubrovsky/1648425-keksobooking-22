@@ -1,3 +1,3 @@
-import {getSimilarAds} from './similar-ads.js';
+import {generateMarkup} from './generate-markup.js';
 
-getSimilarAds();
+generateMarkup()
