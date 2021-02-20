@@ -19,14 +19,33 @@ const translateType = (type) => {
   }
 }
   
-const getIcons = (featuresArray) => {
+const getAdPhotos = (template, offer) => {
+  const cardPhoto = template.querySelector('.popup__photos');
+  const cardPhotoItem = cardPhoto.querySelector('img');
+  if (offer.photos.length === 0) {
+    cardPhoto.style.display = 'none';
+  }
+  if (offer.photos.length > 0) {
+    offer.photos.forEach((obj, index) => {
+      if (index === 0) {
+        cardPhotoItem.src = obj;
+      } else {
+        const cardPhotos = cardPhotoItem.cloneNode(true);
+        cardPhotos.src = obj;
+        cardPhoto.appendChild(cardPhotos);
+      }
+    });
+  }
+}
+
+const getFeaturesIcons = (featuresArray) => {
   let features = [];
   for (let i = 0; i < featuresArray.length; i++) {
-    const getIcon = (feature) => {
-      let featuresClass =`<li class="popup__feature popup__feature--${feature}"></li>`;
+    const getFeatureIcon = (feature) => {
+      const featuresClass =`<li class="popup__feature popup__feature--${feature}"></li>`;
       return featuresClass
     }
-    features += getIcon(featuresArray[i]);
+    features += getFeatureIcon(featuresArray[i]);
   } return features
 }
   
@@ -38,39 +57,27 @@ const cardTemplate = document.querySelector('#card').content;
 const mapBlock = document.querySelector('.map__canvas');
 const similarAdsList = getSimilarAds();
 const similarAdFragment = document.createDocumentFragment();
+
 const generateMarkup = () => {
-  similarAdsList.forEach((ad) => {
+  similarAdsList.forEach(({author, offer}) => {
     const offerElement = cardTemplate.cloneNode(true);
-    offerElement.querySelector('.popup__title').textContent = ad.offer.title;
-    offerElement.querySelector('.popup__text--address').textContent = ad.offer.address;
-    offerElement.querySelector('.popup__text--price').innerHTML = `${ad.offer.price} &#x20bd;/ночь`;
-    offerElement.querySelector('.popup__type').textContent = translateType(ad.offer.type);
+    offerElement.querySelector('.popup__title').textContent = offer.title;
+    offerElement.querySelector('.popup__text--address').textContent = offer.address;
+    offerElement.querySelector('.popup__text--price').innerHTML = `${offer.price} &#x20bd;/ночь`;
+    offerElement.querySelector('.popup__type').textContent = translateType(offer.type);
     offerElement.querySelector('.popup__text--capacity').textContent = 
-        `${createTextRoomsForGuests(ad.offer.rooms, ROOMS_WORDS)}
-         для ${createTextRoomsForGuests(ad.offer.guests, GUESTS_WORDS)}`;
+        `${createTextRoomsForGuests(offer.rooms, ROOMS_WORDS)}
+         для ${createTextRoomsForGuests(offer.guests, GUESTS_WORDS)}`;
     offerElement.querySelector('.popup__text--time').textContent = 
-        `Заезд после ${ad.offer.checkin}, выезд до ${ad.offer.checkout}`; 
-    offerElement.querySelector('.popup__features').innerHTML = '';
-    offerElement.querySelector('.popup__features').innerHTML = getIcons(ad.offer.features);
-    offerElement.querySelector('.popup__description').textContent = ad.offer.description;
-    offerElement.querySelector('.popup__avatar').src = ad.author.avatar
-    //Добавляем фото на страницу
-    const cardPhoto = offerElement.querySelector('.popup__photos');
-    const cardPhotoItem = cardPhoto.querySelector('img');
-    if (ad.offer.photos.length === 0) {
-      cardPhotoItem.style.display = 'none';
-    }
-    if (ad.offer.photos.length >= 1) {
-      ad.offer.photos.forEach((obj, index) => {
-        if (index === 0) {
-          cardPhotoItem.src = obj;
-        } else {
-          const cardPhotos = cardPhotoItem.cloneNode(true);
-          cardPhotos.src = obj;
-          cardPhoto.appendChild(cardPhotos);
-        }
-      });
-    }
+        `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`; 
+
+    (offer.features.length === 0) ? offerElement.querySelector('.popup__features').style.display = 'none' :
+      offerElement.querySelector('.popup__features').innerHTML = getFeaturesIcons(offer.features);
+
+    offerElement.querySelector('.popup__description').textContent = offer.description;
+    offerElement.querySelector('.popup__avatar').src = author.avatar
+    getAdPhotos(offerElement, offer)
+
     similarAdFragment.appendChild(offerElement)
   })
   mapBlock.appendChild(similarAdFragment.firstElementChild)
