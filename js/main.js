@@ -1,3 +1,2 @@
-import {generateMarkup} from './generate-markup.js';
-
-generateMarkup()
+import {showMap} from './map.js'
+showMap()
