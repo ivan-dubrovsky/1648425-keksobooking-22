@@ -18,7 +18,7 @@ const moveMarker = (marker) => {
 }
 
 // Добавляем главный маркер на карту
-const getMainMarker = () => {
+const createMainMarker = () => {
   const mainPinIcon = L.icon({
     iconUrl: 'img/main-pin.svg',
     iconSize: [52, 52],
@@ -39,7 +39,7 @@ const getMainMarker = () => {
 }
 
 //Добавляем точки объявлений
-const getAdvertisingMarkers = (adsArray) => {
+const createAdvertisingMarkers = (adsArray) => {
   adsArray.forEach((ad) => {
     const {location} = ad
     const pinIcon = L.icon({
@@ -59,7 +59,7 @@ const getAdvertisingMarkers = (adsArray) => {
     
     marker
       .addTo(map)
-      .bindPopup(getTemplateMarkup())
+      .bindPopup(getTemplateMarkup(ad))
   });
 }
 
@@ -67,7 +67,6 @@ const getAdvertisingMarkers = (adsArray) => {
 //Отображение карты
 const showMap = () => {
   map.on('load', () => {
-    status === true
     activatePage()
   })
     .setView({
@@ -81,8 +80,8 @@ const showMap = () => {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   ).addTo(map);
-  getMainMarker();
-  getAdvertisingMarkers(getSimilarAds())
+  createMainMarker();
+  createAdvertisingMarkers(getSimilarAds())
 }
   
 export {showMap, TOKIO_CENTER}
