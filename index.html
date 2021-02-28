@@ -5,9 +5,11 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href='leaflet/leaflet.css'>
   <title>Кексобукинг</title>
 </head>
 <body>
+
 
   <main>
     <div class="promo">
@@ -18,8 +20,11 @@
     <!-- Карта объявлений -->
     <section class="map">
 
-      <!-- Блок для вставки карты -->
-      <div class="map__canvas" id="map-canvas"></div>
+<!-- Блок для вставки карты -->
+      <div class="map__canvas" id="map-canvas">
+        <!-- Элемент отрисовки карты--> 
+          <div id="map" style="height: 480px;"></div>
+      </div>
 
       <!-- Фильтрация объявлений -->
       <div class="map__filters-container">
@@ -212,7 +217,7 @@
       </div>
     </article>
   </template>
-
+  
   <!-- Сообщение об успешном создании объявления -->
   <template id="success">
     <div class="success">
@@ -227,6 +232,7 @@
       <button type="button" class="error__button">Попробовать снова</button>
     </div>
   </template>
+<script src='leaflet/leaflet.js'></script>
 <script src='js/main.js' type='module'></script>
 </body>
 </html>

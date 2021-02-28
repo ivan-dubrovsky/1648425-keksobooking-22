@@ -1,3 +1,4 @@
+
 const getArbitraryNumber = (min, max, decimalPlaces) => {
   if (max <= min || max <= 0 || min < 0) {
     return 'Некорректный ввод'
@@ -24,6 +25,23 @@ const getDeclension = (value, words) => {
   return words[2];
 }
 
-export {getArbitraryNumber};
-export {getInteger};
-export {getDeclension}
+const createTextRoomsForGuests = (value, words) => {
+  return `${value} ${getDeclension(value, words)}`;
+}
+
+const translateType = (type) => {
+  switch (type) {
+    case 'palace':
+      return 'Дворец'
+    case 'flat':
+      return 'Квартира';
+    case 'bungalow':
+      return 'Бунгало';
+    case 'house':
+      return 'Дом';
+    default:
+      return type;
+  }
+}
+
+export {getInteger, getDeclension, getArbitraryNumber, translateType, createTextRoomsForGuests};

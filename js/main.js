@@ -1,3 +1,4 @@
-import {generateMarkup} from './generate-markup.js';
-
-generateMarkup()
+import {showMap} from './map.js'
+import {deactivatePage} from './page-state.js'
+deactivatePage()
+showMap()
