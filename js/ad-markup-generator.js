@@ -1,4 +1,3 @@
-// import { getAd } from './ad-description.js';
 import {translateType, createTextRoomsForGuests} from './utils.js'
 
 const ROOMS_WORDS = ['комната', 'комнаты', 'комнат'];
