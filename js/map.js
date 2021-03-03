@@ -1,7 +1,7 @@
 /* global L:readonly */
 import {activatePage, addressBlock} from './page-state.js'
 import {getTemplateMarkup} from './ad-markup-generator.js';
-import { getSimilarAds } from './similar-ads.js';
+// import { getSimilarAds } from './similar-ads.js';
 
 //Центр Токио
 const TOKIO_CENTER = {
@@ -13,9 +13,10 @@ const map = L.map('map');
 const moveMarker = (marker) => {
   marker.on('move', (evt) => {
     addressBlock.value = [evt.target.getLatLng().lat.toFixed(5), evt.target.getLatLng().lng.toFixed(5)];
-    addressBlock.setAttribute('disabled', 'disabled')
+    addressBlock.readOnly = true;
   });
 }
+
 
 // Добавляем главный маркер на карту
 const getMainMarker = () => {
@@ -26,8 +27,8 @@ const getMainMarker = () => {
   });
   const mainMarker = L.marker(
     {
-      lat:  35.67949339551154,
-      lng: 139.75235328394038,
+      lat:  TOKIO_CENTER.x,
+      lng: TOKIO_CENTER.y,
     },
     {
       draggable: true,
@@ -40,32 +41,34 @@ const getMainMarker = () => {
 
 //Добавляем точки объявлений
 const getAdvertisingMarkers = (adsArray) => {
-  adsArray.forEach((ad) => {
-    const {location} = ad
-    const pinIcon = L.icon({
-      iconUrl: 'img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-    });
-    const marker = L.marker(
-      {
-        lat: location.x,
-        lng: location.y,
-      },
-      {
-        pinIcon,
-      },
-    );
+  if (adsArray) {
+    adsArray.forEach((ad) => {
+      const {location} = ad
+      const pinIcon = L.icon({
+        iconUrl: 'img/pin.svg',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      });
+      const marker = L.marker(
+        {
+          lat: location.lat,
+          lng: location.lng,
+        },
+        {
+          pinIcon,
+        },
+      );
     
-    marker
-      .addTo(map)
-      .bindPopup(getTemplateMarkup())
-  });
+      marker
+        .addTo(map)
+        .bindPopup(getTemplateMarkup(ad))
+    });
+  }
 }
 
 
 //Отображение карты
-const showMap = () => {
+const showMap = (adsData) => {
   map.on('load', () => {
     status === true
     activatePage()
@@ -82,7 +85,7 @@ const showMap = () => {
     },
   ).addTo(map);
   getMainMarker();
-  getAdvertisingMarkers(getSimilarAds())
+  getAdvertisingMarkers(adsData)
 }
   
-export {showMap, TOKIO_CENTER}
+export {showMap, TOKIO_CENTER, getAdvertisingMarkers, getMainMarker, moveMarker}

@@ -1,4 +1,4 @@
-import { getAd } from './ad-description.js';
+// import { getAd } from './ad-description.js';
 import {translateType, createTextRoomsForGuests} from './utils.js'
 
 const ROOMS_WORDS = ['комната', 'комнаты', 'комнат'];
@@ -35,8 +35,7 @@ const getFeaturesIcons = (featuresArray) => {
 }
   
 // Функция для генерации разметки объявления
-const getTemplateMarkup = () => {
-  const ad = getAd();
+const getTemplateMarkup = (ad) => {
   const cardTemplate = document.querySelector('#card')
     .content
     .querySelector('.popup');

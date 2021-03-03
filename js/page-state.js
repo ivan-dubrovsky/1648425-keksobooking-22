@@ -6,6 +6,7 @@ const filterSelect = mapFilters.querySelectorAll('select');
 const fieldsetBlock =  adForm.querySelectorAll('fieldset');
 const addressBlock = document.querySelector('#address');
 
+
 //Переводим страницу в неактивное состояние
 const deactivatePage = () => {
   filterSelect.forEach((select) => {
