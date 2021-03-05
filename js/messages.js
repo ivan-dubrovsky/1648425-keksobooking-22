@@ -1,5 +1,8 @@
 import {onClickRemove, onKeyRemove} from './event-listeners.js'
 
+const ERROR_MESSAGE = document.querySelector('#error').content.querySelector('.error');
+const SUCCESS_MESSAGE = document.querySelector('#success').content.querySelector('.success');
+
 // Сообщение об ошибке
 const ALERT_SHOW_TIME =  5000
 const showAlert = (message) => {
@@ -22,20 +25,18 @@ const showAlert = (message) => {
 
 // Сообщение об успешной отправке данных
 const addSuccessMessage = () => {
-  const successMessage = document.querySelector('#success').content.querySelector('.success');
-  successMessage.style.zIndex = 1000;
-  document.body.append(successMessage)
-  onClickRemove(successMessage)
-  onKeyRemove(successMessage)
+  SUCCESS_MESSAGE.style.zIndex = 1000;
+  document.body.append(SUCCESS_MESSAGE)
+  onClickRemove(SUCCESS_MESSAGE)
+  onKeyRemove(SUCCESS_MESSAGE)
 }
 
 // Сообщение об ошибке при отправке данных
 const addErrorMessage = () => {
-  const errorMessage = document.querySelector('#error').content.querySelector('.error');
-  errorMessage.style.zIndex = 1000;
-  document.body.append(errorMessage)
-  onClickRemove(errorMessage)
-  onKeyRemove(errorMessage)
+  ERROR_MESSAGE.style.zIndex = 1000;
+  document.body.append(ERROR_MESSAGE)
+  onClickRemove(ERROR_MESSAGE)
+  onKeyRemove(ERROR_MESSAGE)
 }
 
 export {showAlert, addErrorMessage, addSuccessMessage}

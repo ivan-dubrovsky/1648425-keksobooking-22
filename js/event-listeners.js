@@ -1,6 +1,7 @@
 import {cleanFields} from './page-state.js';
 import {sendData} from './data.js';
 
+const cleanButton = document.querySelector('.ad-form__reset')
 const userForm = document.querySelector('.ad-form')
 
 const setUserFormSubmit = () => {
@@ -28,7 +29,6 @@ const onKeyRemove = (errorMessage) => {
 };
   
 // Функция очистки всех поле по клику на "Очистить" 
-const cleanButton = document.querySelector('.ad-form__reset')
 const onClickClearForm = () => {
   cleanButton.addEventListener('click', (evt) => {
     evt.preventDefault();
