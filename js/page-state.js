@@ -1,10 +1,12 @@
-import {TOKIO_CENTER} from './map.js'
+import {TOKIO_CENTER} from './map.js';
+import { userForm } from './event-listeners.js'; 
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const filterSelect = mapFilters.querySelectorAll('select'); 
 const fieldsetBlock =  adForm.querySelectorAll('fieldset');
 const addressBlock = document.querySelector('#address');
+
 
 //Переводим страницу в неактивное состояние
 const deactivatePage = () => {
@@ -33,4 +35,12 @@ const activatePage = () => {
   addressBlock.value = [TOKIO_CENTER.x.toFixed(5), TOKIO_CENTER.y.toFixed(5)]
 }
 
-export {activatePage, deactivatePage, addressBlock}
+
+// Функция очистки полей и установки значений по умолчанию в поле адрес
+const cleanFields = () => {
+  userForm.reset();
+  addressBlock.value = `${TOKIO_CENTER.x.toFixed(5)},${TOKIO_CENTER.y.toFixed(5)}`
+}
+
+
+export {activatePage, deactivatePage, addressBlock, cleanFields}

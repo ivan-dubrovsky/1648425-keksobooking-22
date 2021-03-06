@@ -1,4 +1,8 @@
-import {showMap} from './map.js'
-import {deactivatePage} from './page-state.js'
+import {deactivatePage} from './page-state.js';
+import {loadData} from  './data.js';
+import {onClickClearForm, setUserFormSubmit} from './event-listeners.js'
+
 deactivatePage()
-showMap()
+loadData()
+onClickClearForm()
+setUserFormSubmit()

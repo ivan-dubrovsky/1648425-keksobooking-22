@@ -44,4 +44,6 @@ const translateType = (type) => {
   }
 }
 
+
+
 export {getInteger, getDeclension, getArbitraryNumber, translateType, createTextRoomsForGuests};
