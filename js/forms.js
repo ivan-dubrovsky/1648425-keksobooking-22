@@ -94,10 +94,18 @@ const enableElements = (element, elementNumbers) => {
   })
 }
 
+const setValueForHundredGuests =() => {
+  roomNumber.addEventListener('change', (evt) => {
+    if (evt.target.value === '100') {
+      capacity.value = '0'
+    }
+  })
+}
+
 const capacityAndRoomsValidity = () => {
-  roomNumber.setAttribute('disabled', 'disabled')
+  setValueForHundredGuests();
+  
   capacity.addEventListener('change', (evt) => {
-    roomNumber.removeAttribute('disabled', 'disabled')
     switch (evt.target.value) {
       case '1':
         enableElements(roomNumber, ['0', '1', '2'])
