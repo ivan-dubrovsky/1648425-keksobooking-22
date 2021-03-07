@@ -23,21 +23,20 @@ const deactivatePage = () => {
 }
 
 // Переводим страницу в активное состояние
-const activatePage = (status) => {
-  if (!status) {
-    adForm.classList.remove('ad-form--disabled')   
-    fieldsetBlock.forEach((block) => {
-      block.removeAttribute('disabled', 'disabled')
-      mapFilters.querySelector('fieldset').removeAttribute('disabled', 'disabled')
-      mapFilters.classList.remove('map__filters--disabled')
-      filterSelect.forEach((select) => {
-        select.removeAttribute('disabled', 'disabled')
-      })
+const activatePage = () => {
+  adForm.classList.remove('ad-form--disabled')   
+  fieldsetBlock.forEach((block) => {
+    block.removeAttribute('disabled', 'disabled')
+    mapFilters.querySelector('fieldset').removeAttribute('disabled', 'disabled')
+    mapFilters.classList.remove('map__filters--disabled')
+    filterSelect.forEach((select) => {
+      select.removeAttribute('disabled', 'disabled')
     })
     addressBlock.value = [TOKIO_CENTER.x.toFixed(5), TOKIO_CENTER.y.toFixed(5)];
     setMinValuesForTypes();
     setCheckTime();
   }
+  })
 }
 
 
