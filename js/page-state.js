@@ -1,6 +1,6 @@
 import {TOKIO_CENTER} from './map.js';
 import { userForm } from './event-listeners.js'; 
-import {setMinValuesForTypes, setCheckTime} from './forms.js';
+import {setMinValuesForTypes, setCheckTime, titleValidity, capacityAndRoomsValidity} from './forms.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -35,6 +35,8 @@ const activatePage = () => {
     addressBlock.value = [TOKIO_CENTER.x.toFixed(5), TOKIO_CENTER.y.toFixed(5)];
     setMinValuesForTypes();
     setCheckTime();
+    titleValidity()
+    capacityAndRoomsValidity()
   }
   })
 }
