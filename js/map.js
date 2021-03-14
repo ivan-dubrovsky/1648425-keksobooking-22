@@ -38,6 +38,7 @@ const createMainMarker = () => {
   mainMarker.addTo(map)
 }
 
+
 //Добавляем точки объявлений
 const createAdvertisingMarkers = (adsArray) => {
   if (adsArray) {
@@ -57,14 +58,13 @@ const createAdvertisingMarkers = (adsArray) => {
           pinIcon,
         },
       );
-    
+
       marker
         .addTo(map)
         .bindPopup(getTemplateMarkup(ad))
     });
   }
 }
-
 
 //Отображение карты
 const showMap = (adsData) => {
@@ -83,7 +83,7 @@ const showMap = (adsData) => {
     },
   ).addTo(map);
   createMainMarker();
-  createAdvertisingMarkers(adsData)
+  // createAdvertisingMarkers(adsData)
 }
   
-export {showMap, TOKIO_CENTER, createAdvertisingMarkers, createMainMarker, moveMarker}
+export {showMap, TOKIO_CENTER, createAdvertisingMarkers, createMainMarker, moveMarker, map}

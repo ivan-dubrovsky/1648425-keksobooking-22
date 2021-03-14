@@ -37,7 +37,6 @@ const activatePage = () => {
     setCheckTime();
     titleValidity()
     capacityAndRoomsValidity()
-  }
   })
 }
 
