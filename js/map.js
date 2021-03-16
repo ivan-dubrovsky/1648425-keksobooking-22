@@ -40,10 +40,10 @@ const createMainMarker = () => {
 
 
 //Добавляем точки объявлений
+const markers = [];
 const createAdvertisingMarkers = (adsArray) => {
   if (adsArray) {
     adsArray.forEach((ad) => {
-      const {location} = ad
       const pinIcon = L.icon({
         iconUrl: 'img/pin.svg',
         iconSize: [40, 40],
@@ -51,8 +51,8 @@ const createAdvertisingMarkers = (adsArray) => {
       });
       const marker = L.marker(
         {
-          lat: location.lat,
-          lng: location.lng,
+          lat: ad.location.lat,
+          lng: ad.location.lng,
         },
         {
           pinIcon,
@@ -62,8 +62,15 @@ const createAdvertisingMarkers = (adsArray) => {
       marker
         .addTo(map)
         .bindPopup(getTemplateMarkup(ad))
+      markers.push(marker)
     });
   }
+}
+
+const removeMarkers = () => {
+  markers.forEach(marker => {
+    marker.remove();
+  });
 }
 
 //Отображение карты
@@ -83,7 +90,7 @@ const showMap = (adsData) => {
     },
   ).addTo(map);
   createMainMarker();
-  // createAdvertisingMarkers(adsData)
+  createAdvertisingMarkers(adsData)
 }
   
-export {showMap, TOKIO_CENTER, createAdvertisingMarkers, createMainMarker, moveMarker, map}
+export {showMap, TOKIO_CENTER, createAdvertisingMarkers, createMainMarker, moveMarker, removeMarkers}

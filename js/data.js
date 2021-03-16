@@ -1,6 +1,7 @@
 import {cleanFields} from './page-state.js';
 import {addErrorMessage, addSuccessMessage, showAlert} from './messages.js';
-import {showMap, createAdvertisingMarkers} from './map.js';
+import {showMap} from './map.js';
+import {showAdsMarkers} from './filter.js';
 
 // Отправляем данные 
 const sendData = (data) => {
@@ -25,27 +26,18 @@ const sendData = (data) => {
     });
 }
 
-const mapFilters = document.querySelector('.map__filters');
-const houseInput = mapFilters.querySelector('#housing-type')
+// Переедет в другой модуль --->>>>>>>
 
 
-const typeFilter = (array, cb) => {
-  houseInput.addEventListener('change', () => {
-    const arrayFilter = array
-      .filter((el) => el.offer.type === houseInput.value || el.offer.type === 'any')
-    console.log(arrayFilter)
-    cb(arrayFilter) 
-  })
 
-}
-  
 // Загружаем данные
 const loadData = () => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((ads) => {
-      typeFilter(ads, createAdvertisingMarkers)
       showMap(ads)
+      showAdsMarkers(ads)
+
     })
     .catch(() => {
       showAlert('Не удалось загрузить данные. Попробуйте ещё раз');
