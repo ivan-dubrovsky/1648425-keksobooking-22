@@ -26,10 +26,6 @@ const sendData = (data) => {
     });
 }
 
-// Переедет в другой модуль --->>>>>>>
-
-
-
 // Загружаем данные
 const loadData = () => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')

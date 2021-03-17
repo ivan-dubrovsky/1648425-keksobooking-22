@@ -1,3 +1,4 @@
+/* global _:readonly */
 import {createAdvertisingMarkers, removeMarkers} from './map.js'
 
 const DEFAULT_TYPE = 'any'
@@ -47,7 +48,6 @@ const setFeaturesFilter = (ad) => {
   return (featuresFilterValues.length === 0 || featuresFilterValues.length === matchesCount);
 }
 
-
 const getFilteredAds = (ads) => {
   return ads
     .filter((ad) => (
@@ -61,15 +61,16 @@ const getFilteredAds = (ads) => {
 
 const getArraySlice = (array) => {
   array.slice(ADS_COUNT.min, ADS_COUNT.max)
+
 } 
 
 const showAdsMarkers = (ads) => {
-  mapFilters.addEventListener('change', (evt) => {
+  mapFilters.addEventListener('change', _.debounce(evt => {
     removeMarkers();
     const filteredAds = getFilteredAds(ads, evt.target);
     getArraySlice(filteredAds)
     createAdvertisingMarkers(filteredAds)
-  })
+  }, RERENDER_DELAY))
 }
 
 export {showAdsMarkers}
