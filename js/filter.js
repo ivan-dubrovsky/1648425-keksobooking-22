@@ -64,13 +64,16 @@ const getArraySlice = (array) => {
 
 } 
 
-const showAdsMarkers = (ads) => {
+const showFilteredAdsMarkers = (ads) => {
   mapFilters.addEventListener('change', _.debounce(evt => {
-    removeMarkers();
+    // const markers = createAdvertisingMarkers(ads) //создали переменную, в которую запишем
+    // возвращаемый массив 
+    // console.log(markers) //Массив маркеров отображается
+    removeMarkers(/*передаём markers*/) //но маркеры не удаляются.
     const filteredAds = getFilteredAds(ads, evt.target);
     getArraySlice(filteredAds)
     createAdvertisingMarkers(filteredAds)
   }, RERENDER_DELAY))
 }
 
-export {showAdsMarkers}
+export {showFilteredAdsMarkers}

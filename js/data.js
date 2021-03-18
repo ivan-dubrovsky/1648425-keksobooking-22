@@ -1,7 +1,7 @@
 import {cleanFields} from './page-state.js';
 import {addErrorMessage, addSuccessMessage, showAlert} from './messages.js';
 import {showMap} from './map.js';
-import {showAdsMarkers} from './filter.js';
+import {showFilteredAdsMarkers} from './filter.js';
 
 // Отправляем данные 
 const sendData = (data) => {
@@ -32,7 +32,7 @@ const loadData = () => {
     .then((response) => response.json())
     .then((ads) => {
       showMap(ads)
-      showAdsMarkers(ads)
+      showFilteredAdsMarkers(ads)
 
     })
     .catch(() => {

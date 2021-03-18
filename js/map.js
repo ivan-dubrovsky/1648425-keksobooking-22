@@ -40,8 +40,9 @@ const createMainMarker = () => {
 
 
 //Добавляем точки объявлений
-const markers = [];
+const markersAds = [];
 const createAdvertisingMarkers = (adsArray) => {
+//const markersAds = [] // Переносим массив из глобальной области в функцию
   if (adsArray) {
     adsArray.forEach((ad) => {
       const pinIcon = L.icon({
@@ -62,16 +63,17 @@ const createAdvertisingMarkers = (adsArray) => {
       marker
         .addTo(map)
         .bindPopup(getTemplateMarkup(ad))
-      markers.push(marker)
-    });
-  }
+      markersAds.push(marker)
+    }); 
+  } //return markersAds // Функция createAdvertisingMarkers возвращает нам массив с маркерами
 }
 
-const removeMarkers = () => {
-  markers.forEach(marker => {
+const removeMarkers = (/*эта функция принимает массив, который мы ей передадим в showFilteredAdsMarkers*/) => {
+  markersAds.forEach(marker => {
     marker.remove();
   });
 }
+// переходим в filter.js строка 67
 
 //Отображение карты
 const showMap = (adsData) => {
