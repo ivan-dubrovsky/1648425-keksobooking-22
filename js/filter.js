@@ -1,6 +1,7 @@
 /* global _:readonly */
 import {createAdvertisingMarkers, removeMarkers} from './map.js'
 
+
 const DEFAULT_TYPE = 'any'
 const PRICE_VALUES = {
   'min': 10000,
@@ -18,6 +19,13 @@ const priceInput = mapFilters.querySelector('#housing-price')
 const roomsInput = mapFilters.querySelector('#housing-rooms')
 const guestsInput = mapFilters.querySelector('#housing-guests')
 const featuresInput = mapFilters.querySelector('#housing-features')
+
+// отключить удобства
+const check = featuresInput.querySelectorAll('input:checked')
+check.forEach((el) => {
+  el.checked = false
+})
+
 
 const setAdsFilter = (input, ad, dataType) => {
   return (input.value === DEFAULT_TYPE || ad === dataType(input.value)) 
@@ -43,7 +51,9 @@ const getMatchesCount = (arrayA, arrayB) => {
 const setFeaturesFilter = (ad) => {
   const selectedCheckbox = featuresInput.querySelectorAll('input:checked');
   const featuresFilterValues = [];
-  selectedCheckbox.forEach((element) => featuresFilterValues.push(element.value));
+  selectedCheckbox.forEach((element) => {
+    featuresFilterValues.push(element.value)
+  });
   const matchesCount = getMatchesCount(ad, featuresFilterValues);
   return (featuresFilterValues.length === 0 || featuresFilterValues.length === matchesCount);
 }
@@ -61,19 +71,22 @@ const getFilteredAds = (ads) => {
 
 const getArraySlice = (array) => {
   array.slice(ADS_COUNT.min, ADS_COUNT.max)
-
 } 
 
 const showFilteredAdsMarkers = (ads) => {
+  let markers = createAdvertisingMarkers(ads)
   mapFilters.addEventListener('change', _.debounce(evt => {
-    // const markers = createAdvertisingMarkers(ads) //создали переменную, в которую запишем
-    // возвращаемый массив 
-    // console.log(markers) //Массив маркеров отображается
-    removeMarkers(/*передаём markers*/) //но маркеры не удаляются.
+    removeMarkers(markers)
     const filteredAds = getFilteredAds(ads, evt.target);
     getArraySlice(filteredAds)
-    createAdvertisingMarkers(filteredAds)
+    markers = createAdvertisingMarkers(filteredAds)
   }, RERENDER_DELAY))
 }
 
-export {showFilteredAdsMarkers}
+const resetFilter = () => {
+  mapFilters.reset();
+};
+
+
+
+export {showFilteredAdsMarkers, resetFilter}

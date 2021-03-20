@@ -36,13 +36,13 @@ const createMainMarker = () => {
   );
   moveMarker(mainMarker);
   mainMarker.addTo(map)
+  return mainMarker
 }
 
 
 //Добавляем точки объявлений
-const markersAds = [];
 const createAdvertisingMarkers = (adsArray) => {
-//const markersAds = [] // Переносим массив из глобальной области в функцию
+  const markers = [];
   if (adsArray) {
     adsArray.forEach((ad) => {
       const pinIcon = L.icon({
@@ -63,20 +63,19 @@ const createAdvertisingMarkers = (adsArray) => {
       marker
         .addTo(map)
         .bindPopup(getTemplateMarkup(ad))
-      markersAds.push(marker)
+      markers.push(marker)
     }); 
-  } //return markersAds // Функция createAdvertisingMarkers возвращает нам массив с маркерами
+  } return markers 
 }
 
-const removeMarkers = (/*эта функция принимает массив, который мы ей передадим в showFilteredAdsMarkers*/) => {
-  markersAds.forEach(marker => {
+const removeMarkers = (markers) => {
+  markers.forEach(marker => {
     marker.remove();
   });
 }
-// переходим в filter.js строка 67
 
 //Отображение карты
-const showMap = (adsData) => {
+const showMap = () => {
   map.on('load', () => {
     activatePage()
   })
@@ -91,8 +90,6 @@ const showMap = (adsData) => {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   ).addTo(map);
-  createMainMarker();
-  createAdvertisingMarkers(adsData)
 }
   
 export {showMap, TOKIO_CENTER, createAdvertisingMarkers, createMainMarker, moveMarker, removeMarkers}

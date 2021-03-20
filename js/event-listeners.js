@@ -1,5 +1,7 @@
 import {cleanFields} from './page-state.js';
 import {sendData} from './data.js';
+import { createMainMarker} from './map.js';
+import {resetFilter} from './filter.js'
 
 const cleanButton = document.querySelector('.ad-form__reset')
 const userForm = document.querySelector('.ad-form')
@@ -27,14 +29,31 @@ const onKeyRemove = (errorMessage) => {
     }
   })
 };
-  
-// Функция очистки всех поле по клику на "Очистить" 
-const onClickClearForm = () => {
+
+
+// Функция очистки всех поле по клику на "Очистить"
+const onClickClearButton = (cb) => {
   cleanButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    cleanFields()
+    evt.preventDefault()
+    cb()
   })
 }
 
+const clearForms = () => {
+  cleanFields()
+}
 
-export {onClickRemove, onKeyRemove, onClickClearForm, setUserFormSubmit, userForm}
+onClickClearButton(clearForms)
+
+const clearFilters = () => {
+  let marker = createMainMarker()
+  cleanButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    marker.remove()
+    marker = createMainMarker()
+    resetFilter()
+  })
+}
+clearFilters()
+
+export {onClickRemove, onKeyRemove, setUserFormSubmit, userForm}
