@@ -1,7 +1,6 @@
 /* global _:readonly */
 import {createAdvertisingMarkers, removeMarkers} from './map.js'
 
-
 const DEFAULT_TYPE = 'any'
 const PRICE_VALUES = {
   'min': 10000,
@@ -19,12 +18,6 @@ const priceInput = mapFilters.querySelector('#housing-price')
 const roomsInput = mapFilters.querySelector('#housing-rooms')
 const guestsInput = mapFilters.querySelector('#housing-guests')
 const featuresInput = mapFilters.querySelector('#housing-features')
-
-// отключить удобства
-const check = featuresInput.querySelectorAll('input:checked')
-check.forEach((el) => {
-  el.checked = false
-})
 
 
 const setAdsFilter = (input, ad, dataType) => {
@@ -75,6 +68,10 @@ const getArraySlice = (array) => {
 
 const showFilteredAdsMarkers = (ads) => {
   let markers = createAdvertisingMarkers(ads)
+  mapFilters.addEventListener('reset', () => {
+    removeMarkers(markers)
+    markers = createAdvertisingMarkers(ads)
+  })
   mapFilters.addEventListener('change', _.debounce(evt => {
     removeMarkers(markers)
     const filteredAds = getFilteredAds(ads, evt.target);

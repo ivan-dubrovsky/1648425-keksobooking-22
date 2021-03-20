@@ -2,7 +2,6 @@ import {cleanFields} from './page-state.js';
 import {addErrorMessage, addSuccessMessage, showAlert} from './messages.js';
 import {showMap} from './map.js';
 import {showFilteredAdsMarkers} from './filter.js';
-// import {onClickClearForm} from './event-listeners.js'
 
 // Отправляем данные 
 const sendData = (data) => {

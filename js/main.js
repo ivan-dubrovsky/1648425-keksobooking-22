@@ -5,7 +5,6 @@ import {setUserFormSubmit} from './event-listeners.js'
 
 deactivatePage()
 loadData()
-// onClickClearForm()
 setUserFormSubmit()
 
 

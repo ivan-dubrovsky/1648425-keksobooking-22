@@ -30,7 +30,6 @@ const onKeyRemove = (errorMessage) => {
   })
 };
 
-
 // Функция очистки всех поле по клику на "Очистить"
 const onClickClearButton = (cb) => {
   cleanButton.addEventListener('click', (evt) => {

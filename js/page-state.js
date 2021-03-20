@@ -40,7 +40,6 @@ const activatePage = () => {
   })
 }
 
-
 // Функция очистки полей и установки значений по умолчанию в поле адрес
 const cleanFields = () => {
   userForm.reset();

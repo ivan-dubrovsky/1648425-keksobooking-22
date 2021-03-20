@@ -39,7 +39,6 @@ const createMainMarker = () => {
   return mainMarker
 }
 
-
 //Добавляем точки объявлений
 const createAdvertisingMarkers = (adsArray) => {
   const markers = [];
