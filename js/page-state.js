@@ -27,8 +27,7 @@ const activatePage = () => {
   adForm.classList.remove('ad-form--disabled')   
   fieldsetBlock.forEach((block) => {
     block.removeAttribute('disabled', 'disabled')
-    mapFilters.querySelector('fieldset').removeAttribute('disabled', 'disabled')
-    mapFilters.classList.remove('map__filters--disabled')
+
     filterSelect.forEach((select) => {
       select.removeAttribute('disabled', 'disabled')
     })
@@ -47,4 +46,4 @@ const cleanFields = () => {
 }
 
 
-export {activatePage, deactivatePage, addressBlock, cleanFields}
+export {activatePage, deactivatePage, addressBlock, cleanFields, mapFilters}

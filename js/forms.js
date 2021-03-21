@@ -33,7 +33,6 @@ const priceValidity = (cost) => {
 //Устанавливаем минимальную цену и placeholder
 const setMinValuesForTypes = () => {
   const type = document.querySelector('#type')
-
   const setPrice = (cost) => {
     price.min = cost;
     price.placeholder = String(cost);
@@ -64,7 +63,6 @@ const setMinValuesForTypes = () => {
 const setCheckTime = () => {
   const checkInTime = document.querySelector('#timein')
   const checkOutTime = document.querySelector('#timeout')
-    
   checkInTime.addEventListener('change', (evt) => {
     checkOutTime.value = evt.target.value
   })
@@ -104,7 +102,6 @@ const setValueForHundredGuests =() => {
 
 const capacityAndRoomsValidity = () => {
   setValueForHundredGuests();
-  
   capacity.addEventListener('change', (evt) => {
     switch (evt.target.value) {
       case '1':

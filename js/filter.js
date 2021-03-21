@@ -85,5 +85,4 @@ const resetFilter = () => {
 };
 
 
-
 export {showFilteredAdsMarkers, resetFilter}

@@ -1,4 +1,3 @@
-
 const getArbitraryNumber = (min, max, decimalPlaces) => {
   if (max <= min || max <= 0 || min < 0) {
     return 'Некорректный ввод'
@@ -43,7 +42,6 @@ const translateType = (type) => {
       return type;
   }
 }
-
 
 
 export {getInteger, getDeclension, getArbitraryNumber, translateType, createTextRoomsForGuests};

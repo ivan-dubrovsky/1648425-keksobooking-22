@@ -1,6 +1,7 @@
 /* global L:readonly */
-import {activatePage, addressBlock} from './page-state.js'
+import {activatePage, addressBlock, mapFilters} from './page-state.js'
 import {getTemplateMarkup} from './ad-markup-generator.js';
+import {showFilteredAdsMarkers} from './filter.js';
 
 //Центр Токио
 const TOKIO_CENTER = {
@@ -15,7 +16,6 @@ const moveMarker = (marker) => {
     addressBlock.readOnly = true;
   });
 }
-
 
 // Добавляем главный маркер на карту
 const createMainMarker = () => {
@@ -43,6 +43,8 @@ const createMainMarker = () => {
 const createAdvertisingMarkers = (adsArray) => {
   const markers = [];
   if (adsArray) {
+    mapFilters.querySelector('fieldset').removeAttribute('disabled', 'disabled')
+    mapFilters.classList.remove('map__filters--disabled')
     adsArray.forEach((ad) => {
       const pinIcon = L.icon({
         iconUrl: 'img/pin.svg',
@@ -74,7 +76,7 @@ const removeMarkers = (markers) => {
 }
 
 //Отображение карты
-const showMap = () => {
+const showMap = (ads) => {
   map.on('load', () => {
     activatePage()
   })
@@ -89,6 +91,7 @@ const showMap = () => {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   ).addTo(map);
+  showFilteredAdsMarkers(ads)
 }
   
 export {showMap, TOKIO_CENTER, createAdvertisingMarkers, createMainMarker, moveMarker, removeMarkers}

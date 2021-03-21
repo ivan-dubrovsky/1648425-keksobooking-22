@@ -6,7 +6,3 @@ import {setUserFormSubmit} from './event-listeners.js'
 deactivatePage()
 loadData()
 setUserFormSubmit()
-
-
-
-
