@@ -1,5 +1,6 @@
 /* global _:readonly */
 import {createAdvertisingMarkers, removeMarkers} from './map.js'
+import {clearFilters} from './event-listeners.js'
 
 const DEFAULT_TYPE = 'any'
 const PRICE_VALUES = {
@@ -68,6 +69,7 @@ const getArraySlice = (array) => {
 
 const showFilteredAdsMarkers = (ads) => {
   let markers = createAdvertisingMarkers(ads)
+  clearFilters()
   mapFilters.addEventListener('reset', () => {
     removeMarkers(markers)
     markers = createAdvertisingMarkers(ads)

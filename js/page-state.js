@@ -1,5 +1,5 @@
 import {TOKIO_CENTER} from './map.js';
-import { userForm } from './event-listeners.js'; 
+import {userForm, onClickClearButton} from './event-listeners.js'; 
 import {setMinValuesForTypes, setCheckTime, titleValidity, capacityAndRoomsValidity} from './forms.js';
 
 const adForm = document.querySelector('.ad-form');
@@ -27,7 +27,6 @@ const activatePage = () => {
   adForm.classList.remove('ad-form--disabled')   
   fieldsetBlock.forEach((block) => {
     block.removeAttribute('disabled', 'disabled')
-
     filterSelect.forEach((select) => {
       select.removeAttribute('disabled', 'disabled')
     })
@@ -37,6 +36,7 @@ const activatePage = () => {
     titleValidity()
     capacityAndRoomsValidity()
   })
+  onClickClearButton(cleanFields)
 }
 
 // Функция очистки полей и установки значений по умолчанию в поле адрес
